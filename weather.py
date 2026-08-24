@@ -8,8 +8,5 @@ def get_location(city, country, openweathermap_key, state=""):
         return geocoding
 
 def get_weather(lat, lon, openweathermap_key):
-    res = requests.get(f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={openweathermap_key}", timeout=30).json()
+    res = requests.get(f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={openweathermap_key}&units=metric", timeout=30).json()
     return res
-
-def process_weather_data(location, weather):
-     pass

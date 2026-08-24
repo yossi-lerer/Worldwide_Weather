@@ -1,5 +1,6 @@
 from weather import get_location, get_weather
 from user_input import user_input_to_search
+from process_data import process_weather_data, print_weather
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -8,17 +9,16 @@ def main():
     openweathermap_key=os.getenv("OPENWEATHERMAP")
 
     UserInput = user_input_to_search()
-    if type(UserInput) != list:
+    if type(UserInput) != dict:
         print(UserInput)
         exit()
     
-    if len(UserInput) == 2:
-        lat_and_lon = get_location(UserInput[1], UserInput[0], openweathermap_key)
-    else:
-        lat_and_lon = get_location(UserInput[2], UserInput[0], openweathermap_key, UserInput[1])
+    lat_and_lon = get_location(UserInput["city"], UserInput["country"], openweathermap_key, UserInput["state"])
     
     if lat_and_lon != None:
-        print(get_weather(lat_and_lon[0], lat_and_lon[1], openweathermap_key))
+        get_data = get_weather(lat_and_lon[0], lat_and_lon[1], openweathermap_key)
+        processed_data =process_weather_data(UserInput, get_data)
+        print_weather(processed_data)
     else:
         print("Location not found")
 main()

@@ -1,7 +1,11 @@
 import questionary
 
 def user_input_to_search():
-    data = []
+    data =  {
+    'city': "",
+    'state': "",
+    'country': "",        
+    }
 
     print("To get weather data")
 
@@ -10,19 +14,19 @@ def user_input_to_search():
         return "country code does not recognize text"
     if len(country_name.strip()) != 2:
         return "Country code must contain exactly two characters."
-    data.append(country_name.upper().strip())
+    data["country"] = country_name.upper().strip()
 
-    if data[0] == "US":
+    if data["country"] == "US":
         state_name = questionary.text("type the name of a state").ask()
         if state_name.strip() == "":
             return "state name name does not recognize text"
         if len(state_name.strip()) != 2:
             return "Country code must contain exactly two characters."
-        data.append(state_name.upper().strip())
+        data["state"] = state_name.upper().strip()
     
     city_name = questionary.text("type the name of a city").ask()
     if city_name.strip() == "":
         return  "country name name name does not recognize text"
-    data.append(city_name.strip())
+    data["city"] = city_name.strip()
 
     return data
