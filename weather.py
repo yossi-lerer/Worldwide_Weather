@@ -7,10 +7,10 @@ openweathermap_key=os.getenv("OPENWEATHERMAP")
 
 def get_location(city, country, openweathermap_key, state=""):
     if country == "US":
-        res = requests.get(f"http://api.openweathermap.org/geo/1.0/direct?q={city},{state},{country}&limit=5&appid={openweathermap_key}").json()
+        res = requests.get(f"http://api.openweathermap.org/geo/1.0/direct?q={city},{state},{country}&limit=1&appid={openweathermap_key}").json()
         geocoding = [res[0]["lat"], res[0]["lon"]]
     else:
-        res = requests.get(f"http://api.openweathermap.org/geo/1.0/direct?q={city},{country}&limit=5&appid={openweathermap_key}").json()
+        res = requests.get(f"http://api.openweathermap.org/geo/1.0/direct?q={city},{country}&limit=1&appid={openweathermap_key}").json()
         geocoding = [res[0]["lat"], res[0]["lon"]]
     return geocoding
 
